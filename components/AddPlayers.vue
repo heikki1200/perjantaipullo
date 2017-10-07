@@ -1,12 +1,13 @@
 <template>
-  <div class="addPlayers">
-    <input class="new-player box-shadow"
+  <div class="add-players">
+    <input class="box-shadow"
       autofocus autocomplete="off"
       v-bind:placeholder="placeHolder"
       v-model="playerName"
       @keyup.enter="addPlayerToStore()"
     />
     <button class="box-shadow" @click="addPlayerToStore()">+</button>
+    <nuxt-link to="play" class="box-shadow block align-center" v-bind:class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
     <ul class="added-players">
       <li v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)">{{ player.name }}</li>
     </ul>
@@ -33,11 +34,23 @@
       removePlayerFromStore (playerId) {
         this.$store.commit('removePlayer', playerId)
       }
+    },
+    computed: {
+      showPlayButton () {
+        if (this.$store.state.players.length > 1) {
+          return true
+        } else {
+          return false
+        }
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
+  .add-players {
+    position: relative;
+  }
   input {
     border: 0;
     font-family: inherit;
@@ -53,18 +66,36 @@
     font-family: inherit;
     font-size: inherit;
     font-weight: bold;
-    margin: 0 15px;
     padding: 10px;
+  }
+  a {
+    background-color: #05D973;
+    padding: 10px;
+    width: 332px;
+    opacity: 1;
+    transition: all ease-out .2s;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    &.hidden {
+      opacity: 0;
+      top: 0;
+      z-index: -1;
+    }
   }
   .added-players {
     position: absolute;
-    bottom: 15px;
     left: 15px;
     right: 15px;
     color: #000;
+    top: 130px;
     li {
       background-color: #FFF;
-      margin: 10px 0;
+      display: inline-block;
+      margin: 0 15px;
+      padding: 5px 15px;
     }
   }
 </style>

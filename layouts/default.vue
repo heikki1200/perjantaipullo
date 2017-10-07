@@ -1,8 +1,21 @@
 <template>
   <div id="app" class="flex center-ho center-ve">
-    <nuxt />
+    <div class="container">
+      <Bottle />
+      <nuxt />
+    </div>
   </div>
 </template>
+
+<script>
+  import Bottle from '~/components/Bottle.vue'
+
+  export default {
+    components: {
+      Bottle
+    }
+  }
+</script>
 
 <style>
   * {
@@ -22,7 +35,7 @@
     overflow: hidden;
   }
   .container {
-    text-align: center;
+    position: relative;
   }
   h1 {
     font-size: 8vw;
@@ -44,10 +57,29 @@
   .center-ve {
     justify-content: center;
   }
+  .align-center {
+    margin: 0 auto;
+  }
+  .text-center {
+    text-align: center;
+  }
   .text-shadow {
     text-shadow: 0 0 10px #000;
   }
   .box-shadow {
     box-shadow: 0 0 10px #000;
+  }
+  .page-enter-active, .page-leave-active {
+    transition: opacity .25s;
+  }
+  .page-enter, .page-leave-to {
+    opacity: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .block {
+    display: block;
   }
 </style>
