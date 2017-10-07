@@ -9,7 +9,7 @@
     <button class="box-shadow" @click="addPlayerToStore()">+</button>
     <nuxt-link to="play" class="box-shadow block align-center" v-bind:class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
     <ul class="added-players">
-      <li v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)">{{ player.name }}</li>
+      <li v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)" v-bind:style="{ backgroundColor: player.data.color }">{{ player.data.name }}</li>
     </ul>
   </div>
 </template>
@@ -25,8 +25,17 @@
     },
     methods: {
       addPlayerToStore () {
-        this.$store.commit('addPlayer', this.playerName)
+        this.$store.commit('addPlayer', {
+          name: this.playerName,
+          color: 'rgb(' + this.randomColor() + ')'
+        })
         this.clearInputField()
+      },
+      randomColor () {
+        let r = Math.floor(Math.random() * 200) + 10
+        let g = Math.floor(Math.random() * 200) + 10
+        let b = Math.floor(Math.random() * 200) + 10
+        return r + ',' + g + ',' + b
       },
       clearInputField () {
         this.playerName = ''
@@ -92,10 +101,11 @@
     color: #000;
     top: 130px;
     li {
-      background-color: #FFF;
+      color: #FFF;
       display: inline-block;
       margin: 0 15px;
       padding: 5px 15px;
+      text-shadow: 0 0 1px #000;
     }
   }
 </style>

@@ -7,11 +7,11 @@ const createStore = () => {
       counter: 1
     },
     mutations: {
-      addPlayer (state, name) {
-        if (name !== '') {
+      addPlayer (state, data) {
+        if (data !== '') {
           state.players.push({
             id: state.counter++,
-            name: name
+            data
           })
         }
       },
