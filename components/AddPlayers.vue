@@ -32,9 +32,9 @@
         this.clearInputField()
       },
       randomColor () {
-        let r = Math.floor(Math.random() * 200) + 10
-        let g = Math.floor(Math.random() * 200) + 10
-        let b = Math.floor(Math.random() * 200) + 10
+        let r = Math.floor(Math.random() * 245) + 10
+        let g = Math.floor(Math.random() * 245) + 10
+        let b = Math.floor(Math.random() * 245) + 10
         return r + ',' + g + ',' + b
       },
       clearInputField () {
