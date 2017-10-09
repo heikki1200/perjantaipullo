@@ -7,9 +7,9 @@
       @keyup.enter="addPlayerToStore()"
     />
     <button class="box-shadow" @click="addPlayerToStore()">+</button>
-    <nuxt-link to="play" class="box-shadow block align-center" v-bind:class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
+    <nuxt-link to="play" class="box-shadow block align-center" :class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
     <ul class="added-players">
-      <li v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)" v-bind:style="{ backgroundColor: player.data.color }">{{ player.data.name }}</li>
+      <li v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)" :style="{ backgroundColor: 'rgb(' + player.data.color + ')' }">{{ player.data.name }}</li>
     </ul>
   </div>
 </template>
@@ -27,7 +27,7 @@
       addPlayerToStore () {
         this.$store.commit('addPlayer', {
           name: this.playerName,
-          color: 'rgb(' + this.randomColor() + ')'
+          color: this.randomColor()
         })
         this.clearInputField()
       },
