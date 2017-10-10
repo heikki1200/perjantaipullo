@@ -58,6 +58,7 @@
     justify-content: center;
   }
   .align-center {
+    display: block;
     margin: 0 auto;
   }
   .text-center {
@@ -70,7 +71,7 @@
     box-shadow: 0 0 10px #000;
   }
   .page-enter-active, .page-leave-active {
-    transition: opacity .25s;
+    transition: opacity .5s;
   }
   .page-enter, .page-leave-to {
     opacity: 0;
@@ -81,5 +82,15 @@
   }
   .block {
     display: block;
+  }
+  button {
+    background-color: #05D973;
+    border: 0;
+    color: #FFF;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    padding: 10px;
   }
 </style>

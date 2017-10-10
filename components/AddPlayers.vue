@@ -67,16 +67,6 @@
     padding: 10px;
     width: 300px;
   }
-  button {
-    background-color: #05D973;
-    border: 0;
-    color: #FFF;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: bold;
-    padding: 10px;
-  }
   a {
     background-color: #05D973;
     padding: 10px;
@@ -103,7 +93,7 @@
     li {
       color: #FFF;
       display: inline-block;
-      margin: 0 15px;
+      margin: 15px;
       padding: 5px 15px;
       text-shadow: 0 0 1px #000;
     }
