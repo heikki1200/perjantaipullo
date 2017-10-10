@@ -9,7 +9,7 @@
     <button class="box-shadow" @click="addPlayerToStore()">+</button>
     <nuxt-link to="play" class="box-shadow block align-center" :class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
     <ul class="added-players">
-      <li v-bind:key="key" v-for="(player, key) in playersStore" @click="removePlayerFromStore(key)" :style="{ backgroundColor: 'rgb(' + player.data.color + ')' }">{{ player.data.name }}</li>
+      <li :key="key" v-for="(player, key) in playersData" @click="removePlayerFromStore(key)" :style="{ backgroundColor: 'rgb(' + player.data.color + ')' }">{{ player.data.name }}</li>
     </ul>
   </div>
 </template>
@@ -20,7 +20,7 @@
       return {
         placeHolder: 'Lisää pelaaja',
         playerName: '',
-        playersStore: this.$store.state.players
+        playersData: this.$store.getters.getPlayersData
       }
     },
     methods: {
@@ -46,7 +46,7 @@
     },
     computed: {
       showPlayButton () {
-        if (this.$store.state.players.length > 1) {
+        if (this.$store.getters.getPlayersData.length > 1) {
           return true
         } else {
           return false

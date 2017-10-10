@@ -18,6 +18,21 @@ const createStore = () => {
       removePlayer (state, id) {
         state.players.splice(id, 1)
       }
+    },
+    getters: {
+      getPlayersData (state) {
+        return state.players
+      },
+      getPlayersNames (state) {
+        return state.players.map(x => {
+          return x.data.name
+        })
+      },
+      getPlayersColors (state) {
+        return state.players.map(x => {
+          return x.data.color
+        })
+      }
     }
   })
 }
