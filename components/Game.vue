@@ -29,22 +29,32 @@
         let lastEnd = 0
         let margin = 20
         let ctx = canvasElement.getContext('2d')
-        data.map(x => {
-          ctx.fillStyle = 'rgb(' + x.color + ')'
-          ctx.strokeStyle = 'rgb(0, 0, 0)'
-          ctx.font = '20px Avenir'
-          ctx.lineWidth = 5
-          ctx.beginPath()
-          ctx.moveTo(canvasElement.width / 2, canvasElement.height / 2)
-          ctx.arc(canvasElement.width / 2, canvasElement.height / 2, canvasElement.height / 3, lastEnd, lastEnd + toRadians(sliceDeg), false)
-          ctx.closePath()
-          ctx.fillText(x.name, 0, margin)
-          ctx.fill()
-          ctx.stroke()
-          lastEnd += toRadians(sliceDeg)
-          margin += 20
-        })
-        ctx.save()
+        let drawPizza = () => {
+          data.map(x => {
+            ctx.fillStyle = 'rgb(' + x.color + ')'
+            ctx.strokeStyle = 'rgb(0, 0, 0)'
+            ctx.font = '20px Avenir'
+            ctx.lineWidth = 5
+            ctx.beginPath()
+            ctx.moveTo(canvasElement.width / 2, canvasElement.height / 2)
+            ctx.arc(canvasElement.width / 2, canvasElement.height / 2, canvasElement.height / 2.5, lastEnd, lastEnd + toRadians(sliceDeg), false)
+            ctx.closePath()
+            ctx.fillText(x.name, 0, margin)
+            ctx.fill()
+            ctx.stroke()
+            lastEnd += toRadians(sliceDeg)
+            margin += 20
+          })
+          ctx.save()
+        }
+        let drawBottle = (image, size) => {
+          let drawImage = new Image()
+          drawImage.src = `/${image}.png`
+          ctx.drawImage(drawImage, canvasElement.width / 2 - (size / 2), canvasElement.width / 2 - (size / 2), size, size)
+          ctx.save()
+        }
+        drawPizza()
+        drawBottle('koff', 200)
       }
     }
   }
