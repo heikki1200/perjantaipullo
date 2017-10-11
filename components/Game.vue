@@ -29,7 +29,10 @@
         let deg = 0
         let center = canvasElement.width / 2
         let ctx = canvasElement.getContext('2d')
-        let drawPizza = (color, deg) => {
+        let drawImage = new Image()
+        let speed = 0
+        drawImage.src = `/koff.png`
+        let drawSlices = (color, deg) => {
           ctx.save()
           ctx.beginPath()
           ctx.fillStyle = 'rgb(' + color + ')'
@@ -53,21 +56,23 @@
           ctx.fillText(name, center - 100, 10)
           ctx.restore()
         }
-        let drawBottle = (image, size) => {
-          ctx.save()
-          ctx.translate(center, center)
-          ctx.rotate(toRadians(1))
-          let drawImage = new Image()
-          drawImage.src = `/${image}.png`
-          ctx.drawImage(drawImage, 0 - size / 2, 0 - size / 2, size, size)
-          ctx.restore()
+        let drawPizza = () => {
+          setInterval(() => {
+            ctx.save()
+            ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+            data.map(x => {
+              drawSlices(x.color, deg)
+              drawNames(x.name, deg + sliceDeg / 2)
+              deg += sliceDeg
+            })
+            ctx.translate(center, center)
+            ctx.rotate(speed / 180 / Math.PI)
+            ctx.drawImage(drawImage, 0 - 200 / 2, 0 - 200 / 2, 200, 200)
+            speed += 50
+            ctx.restore()
+          }, 10)
         }
-        data.map(x => {
-          drawPizza(x.color, deg)
-          drawNames(x.name, deg + sliceDeg / 2)
-          deg += sliceDeg
-        })
-        drawBottle('koff-small', 200)
+        drawPizza()
       }
     }
   }
