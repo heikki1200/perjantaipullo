@@ -50,14 +50,16 @@
           ctx.textAlign = 'right'
           ctx.fillStyle = 'rgb(255, 255, 255)'
           ctx.font = 'bold 26px Avenir'
-          ctx.fillText(name, canvasElement.width / 2 - 100, 10)
+          ctx.fillText(name, center - 100, 10)
           ctx.restore()
         }
         let drawBottle = (image, size) => {
           ctx.save()
+          ctx.translate(center, center)
+          ctx.rotate(toRadians(1))
           let drawImage = new Image()
           drawImage.src = `/${image}.png`
-          ctx.drawImage(drawImage, center - (size / 2), center - (size / 2), size, size)
+          ctx.drawImage(drawImage, 0 - size / 2, 0 - size / 2, size, size)
           ctx.restore()
         }
         data.map(x => {
@@ -65,7 +67,7 @@
           drawNames(x.name, deg + sliceDeg / 2)
           deg += sliceDeg
         })
-        drawBottle('koff', 200)
+        drawBottle('koff-small', 200)
       }
     }
   }
