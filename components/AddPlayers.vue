@@ -25,11 +25,22 @@
     },
     methods: {
       addPlayerToStore () {
-        this.$store.commit('addPlayer', {
-          name: this.playerName,
-          color: this.randomColor()
+        return new Promise((resolve, reject) => {
+          if (this.playerName !== '') {
+            resolve()
+          } else {
+            reject(Error('No name'))
+          }
         })
-        this.clearInputField()
+          .then((res) => {
+            this.$store.commit('addPlayer', {
+              name: this.playerName,
+              color: this.randomColor()
+            })
+            this.clearInputField()
+          }).catch((err) => {
+            console.log(err)
+          })
       },
       randomColor () {
         let r = Math.floor(Math.random() * 245) + 10
