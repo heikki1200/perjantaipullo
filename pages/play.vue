@@ -1,6 +1,6 @@
 <template>
   <div class="play text-center">
-    <!--<Heading content="Pelaa" />-->
+    <Heading content="Pelaa" />
     <Game />
   </div>
 </template>

@@ -83,7 +83,7 @@
   .block {
     display: block;
   }
-  button {
+  .button {
     background-color: #05D973;
     border: 0;
     color: #FFF;

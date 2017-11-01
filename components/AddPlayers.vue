@@ -6,8 +6,8 @@
       v-model="playerName"
       @keyup.enter="addPlayerToStore()"
     />
-    <button class="box-shadow" @click="addPlayerToStore()">+</button>
-    <nuxt-link to="play" class="box-shadow block align-center" :class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
+    <button class="button box-shadow" @click="addPlayerToStore()">+</button>
+    <nuxt-link to="play" class="button box-shadow block align-center" :class="showPlayButton ? '' : 'hidden'">Pelaa</nuxt-link>
     <ul class="added-players">
       <li :key="key" v-for="(player, key) in playersData" @click="removePlayerFromStore(key)" :style="{ backgroundColor: 'rgb(' + player.data.color + ')' }">{{ player.data.name }}</li>
     </ul>
@@ -79,15 +79,14 @@
     width: 300px;
   }
   a {
-    background-color: #05D973;
     padding: 10px;
-    width: 332px;
     opacity: 1;
     transition: all ease-out .2s;
     position: absolute;
     top: 60px;
     left: 50%;
     transform: translateX(-50%);
+    width: 332px;
     z-index: 1;
     &.hidden {
       opacity: 0;

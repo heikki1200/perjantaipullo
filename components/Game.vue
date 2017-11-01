@@ -1,6 +1,7 @@
 <template>
   <div class="game">
-    <canvas class="canvas" width="500" height="500" v-insert-canvas="playersData"></canvas>
+    <canvas class="canvas" width="500" height="500" v-insert-canvas="playersData" :class="showElement ? 'hidden' : ''"></canvas>
+    <nuxt-link to="/" class="button box-shadow block align-center" :class="showElement ? '' : 'hidden'">Lisää pelaajia</nuxt-link>
     <!--<button class="box-shadow align-center">Spin</button>-->
   </div>
 </template>
@@ -9,12 +10,13 @@
   export default {
     data () {
       return {
-        playersData: this.$store.getters.getPlayersData
+        playersData: this.$store.getters.getPlayersData,
+        showElement: false
       }
     },
     created () {
       if (this.playersData.length === 0) {
-        console.log('empty')
+        this.showElement = true
       }
     },
     directives: {
@@ -83,5 +85,20 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 30px;
+  }
+  .button {
+    opacity: 1;
+    transition: all ease-out .2s;
+    z-index: 1;
+    &.hidden {
+      opacity: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }
+  canvas {
+    &.hidden {
+      display: none;
+    }
   }
 </style>
