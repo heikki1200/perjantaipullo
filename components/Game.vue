@@ -1,8 +1,8 @@
 <template>
   <div class="game">
-    <canvas class="canvas" width="500" height="500" v-insert-canvas="playersData" :class="showElement ? 'hidden' : ''"></canvas>
-    <nuxt-link to="/" class="button box-shadow block align-center" :class="showElement ? '' : 'hidden'">Lisää pelaajia</nuxt-link>
-    <!--<button class="box-shadow align-center">Spin</button>-->
+    <canvas class="canvas" width="300" height="300" v-insert-canvas="playersData" :class="showElement ? 'hidden' : ''"></canvas>
+    <nuxt-link to="/" class="button button-back box-shadow block">Takasin</nuxt-link>
+    <button class="button button-spin box-shadow block align-center" :class="hideSpinButton ? 'hidden' : ''">Spin</button>
   </div>
 </template>
 
@@ -11,12 +11,12 @@
     data () {
       return {
         playersData: this.$store.getters.getPlayersData,
-        showElement: false
+        hideSpinButton: false
       }
     },
     created () {
       if (this.playersData.length === 0) {
-        this.showElement = true
+        this.hideSpinButton = true
       }
     },
     directives: {
@@ -31,9 +31,6 @@
         let deg = 0
         let center = canvasElement.width / 2
         let ctx = canvasElement.getContext('2d')
-        let drawImage = new Image()
-        let speed = 0
-        drawImage.src = `/koff.png`
         let drawSlices = (color, deg) => {
           ctx.save()
           ctx.beginPath()
@@ -52,27 +49,21 @@
           ctx.save()
           ctx.translate(center, center)
           ctx.rotate(toRadians(deg))
-          ctx.textAlign = 'right'
+          ctx.textAlign = 'left'
           ctx.fillStyle = 'rgb(255, 255, 255)'
-          ctx.font = 'bold 26px Avenir'
-          ctx.fillText(name, center - 100, 10)
+          ctx.font = 'bold 18px Avenir'
+          ctx.fillText(name, center - 120, 10)
           ctx.restore()
         }
         let drawPizza = () => {
-          setInterval(() => {
-            ctx.save()
-            ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
-            data.map(x => {
-              drawSlices(x.color, deg)
-              drawNames(x.name, deg + sliceDeg / 2)
-              deg += sliceDeg
-            })
-            ctx.translate(center, center)
-            ctx.rotate(speed / 180 / Math.PI)
-            ctx.drawImage(drawImage, 0 - 200 / 2, 0 - 200 / 2, 200, 200)
-            speed += 50
-            ctx.restore()
-          }, 10)
+          ctx.save()
+          ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+          data.map(x => {
+            drawSlices(x.color, deg)
+            drawNames(x.name, deg + sliceDeg / 2)
+            deg += sliceDeg
+          })
+          ctx.restore()
         }
         drawPizza()
       }
@@ -81,22 +72,22 @@
 </script>
 
 <style scoped lang="scss">
-  button {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px 30px;
-  }
   .button {
-    opacity: 1;
-    transition: all ease-out .2s;
-    z-index: 1;
+    border-radius: 0;
     &.hidden {
-      opacity: 0;
-      top: 0;
-      z-index: -1;
+      display: none;
     }
   }
+  .button-back {
+    left: 15px;
+    position: fixed;
+    top: 15px;
+  }
+  .button-spin {
+    width: 260px;
+  }
   canvas {
+    transform: rotate(-90deg);
     &.hidden {
       display: none;
     }

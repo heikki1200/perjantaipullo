@@ -69,41 +69,48 @@
 
 <style scoped lang="scss">
   .add-players {
+    margin: 0 auto;
     position: relative;
+    width: 260px;
   }
   input {
     border: 0;
     font-family: inherit;
     font-size: inherit;
     padding: 10px;
-    width: 300px;
+    position: relative;
+    width: 100%;
+    z-index: 100;
   }
   a {
     padding: 10px;
-    opacity: 1;
-    transition: all ease-out .2s;
     position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 332px;
+    opacity: 1;
+    bottom: -60px;
+    transition: all ease-out .2s;
+    width: 100%;
     z-index: 1;
     &.hidden {
       opacity: 0;
-      top: 0;
+      bottom: 0;
       z-index: -1;
     }
   }
-  .added-players {
+  .button {
     position: absolute;
+    right: 0;
+    z-index: 100;
+  }
+  .added-players {
+    bottom: 10px;
+    position: fixed;
     left: 15px;
     right: 15px;
     color: #000;
-    top: 130px;
     li {
       color: #FFF;
       display: inline-block;
-      margin: 15px;
+      margin: 10px;
       padding: 5px 15px;
       text-shadow: 0 0 1px #000;
     }
